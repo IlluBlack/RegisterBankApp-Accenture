@@ -1,0 +1,64 @@
+<div *ngIf="!showUserRegistered" class="field-container">
+  <h5>Ingresa tu información personal</h5>
+
+  <form [formGroup]="personalInformation" (ngSubmit)="register()" style="width: 100%">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Ingresa tu nombre" formControlName="firstname">
+      <mat-error *ngIf="personalInformation.invalid">{{getErrorMessage(personalInformation.controls.firstname)}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Apellido</mat-label>
+      <input matInput placeholder="Ingresa tu apellido" formControlName="lastname">
+      <mat-error *ngIf="personalInformation.invalid">{{getErrorMessage(personalInformation.controls.lastname)}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Fecha de nacimiento</mat-label>
+      <input matInput [matDatepicker]="pickerBirthday" autocomplete="off"
+        placeholder="Selecciona tu fecha de nacimiento" formControlName="birthday" readonly
+        (click)="pickerBirthday.open()" [max]="maxDate">
+      <mat-datepicker-toggle matSuffix [for]="pickerBirthday" [disabled]="!personalInformation.valid || loadingBar">
+      </mat-datepicker-toggle>
+      <mat-datepicker #pickerBirthday startView="multi-year" disabled="false"></mat-datepicker>
+
+      <mat-error *ngIf="personalInformation.invalid">{{getErrorMessage(personalInformation.controls.birthday)}}
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div style="height: 1rem;"></div>
+  <mat-progress-bar *ngIf="loadingBar" mode="indeterminate" style="width: 60%;"></mat-progress-bar>
+
+  <div style="padding: 1rem 0rem 2rem 0rem;">
+    <div class="col-12">
+      <button mat-raised-button type="submit" [disabled]="!personalInformation.valid || loadingBar" class="btn-action"
+        (click)="register()">REGISTRARME</button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="showUserRegistered" style="width: 100%">
+  <h5>MIS DATOS</h5>
+
+  <section>
+    <div *ngFor="let data of userFields" class="data">
+      <span>{{data.name}}</span>
+      <strong>{{userData[data.value]}}</strong>
+    </div>
+  </section>
+
+
+  <div style="padding: 1rem 0rem 2rem 0rem;">
+    <div class="col-12">
+      <button mat-raised-button class="btn-action">
+        <span>Continuar</span>
+        <mat-icon>arrow_right</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

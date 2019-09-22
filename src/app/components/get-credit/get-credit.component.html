@@ -1,0 +1,28 @@
+<div class="content">
+  <h3>SOLICITA TU CRÉDITO</h3>
+
+  <section>
+    <div *ngIf="!validID" class="field-container">
+      <mat-form-field>
+        <mat-label>Número de documento</mat-label>
+        <input matInput type="number" placeholder="Ingresa tu número de documento" [formControl]="identification"
+          (keyup.enter)="(!identification.invalid)?  validateUser() : ''">
+        <mat-error *ngIf="identification.invalid">{{getErrorMessage(identification)}}</mat-error>
+      </mat-form-field>
+
+      <div style="height: 1rem;"></div>
+      <mat-progress-bar *ngIf="loadingBar" mode="indeterminate" style="width: 60%;"></mat-progress-bar>
+
+      <div style="padding: 1rem 0rem 2rem 0rem;">
+        <div class="col-12">
+          <button mat-raised-button [disabled]="identification.invalid || loadingBar" (click)="validateUser()" class="btn-action">SOLICITAR
+            MI CRÉDITO</button>
+        </div>
+        <a class="col-12">¿Ya tengo una cuenta?</a>
+      </div>
+    </div>
+
+    <app-get-personal-information *ngIf="validID" class="field-container" [id]="identification.value"></app-get-personal-information>
+  </section>
+
+</div>

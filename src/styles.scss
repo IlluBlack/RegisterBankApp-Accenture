@@ -1,12 +1,42 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-$font-title: 'Noto Sans', sans-serif;
-$font-text: 'Montserrat', sans-serif;
+//CUSTOMIZED MATERIAL THEME
+@import "~@angular/material/theming";
+@include mat-core();
+$material-primary: mat-palette($mat-green);
+$material-accent: mat-palette($mat-orange);
+//$candy-app-warn: mat-palette($mat-red);
+
+$custom-theme: mat-light-theme($material-primary, $material-accent);
+@include angular-material-theme($custom-theme);
+
+//CUSTOMIZED VARIABLES
+$font-title: "Raleway", sans-serif;
+$font-text: "Montserrat", sans-serif;
+
+$primary: #fe5d26;
+$on-primary: white;
+$primary-light: #f2c078;
+
+$background: white;
+$on-background: #faedca;
+
+$secondary: #7ebc89;
+$secondary-light: #c1dbb3;
+
+$font-color-default: black;
+$error-color: #f44336;
 
 html,
 body {
   margin: 0px;
+  padding: 0px;
   font-family: $font-text;
+  background-color: $background;
+}
+
+.content {
+  flex-grow: 1;
 }
 
 h1,
@@ -15,12 +45,53 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $font-title;
+  font-family: $font-title !important;
 }
 
 p,
 span {
-  font-family: $font-text;
+  font-family: $font-text !important;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button {
+  outline: none !important;
+  transition: all 0.1s ease;
+}
+.btn-action {
+  padding: 0.3rem 1rem;
+  background-color: transparent;
+  border: 1.5px solid $secondary;
+  color: $secondary;
+
+  &:not(:disabled):not(.disabled):hover {
+    background-color: $secondary !important;
+    color: $on-primary;
+    transition: all 0.1s ease;
+  }
+}
+
+.mat-raised-button[disabled] {
+  border: none;
+
+  &:hover {
+    //background-color: inherit !important;
+  }
+}
+
+//snackBar
+.mat-snack-bar-container {
+  //default
+  color: $on-primary;
+  background: $primary;
+}
+.mat-snack-bar-handset .mat-snack-bar-container {
+  max-width: 85vw !important;
+}
+.snack-true {
+  color: $background;
+  background: $secondary;
+}
+.snack-false {
+  color: $background;
+  background: $error-color;
+}

@@ -1,0 +1,40 @@
+@import "src/styles.scss";
+
+.field-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h5 {
+  color: $primary-light;
+  padding: 1rem;
+  text-align: center;
+}
+
+form {
+  .mat-form-field {
+    width: 90%;
+    margin-bottom: 1rem;
+  }
+}
+
+section {
+  background-color: $background;
+  padding: 1rem;
+  margin: rem 1rem;
+  text-align: left;
+
+  .data {
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem;
+
+    strong {
+      padding: 0.2rem 0.3rem;
+      border-bottom: solid 1px $on-background;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<div>
+  <mat-toolbar class="menu">
+    <h1 (click)="returnHome()">APP MI BANCO</h1>
+
+    <span class="remaining-space"></span>
+
+    <button mat-icon-button data-toggle="collapse" data-target="#items" aria-expanded="false">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div id="items" class="container-fluid collapse">
+    <div class="item row" *ngFor="let item of menuItems" data-target="#items">
+      <a routerLink="{{item.path}}" routerLinkActive="item-active">{{item.name}}</a>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

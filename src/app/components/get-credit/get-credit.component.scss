@@ -1,0 +1,66 @@
+@import "src/styles.scss";
+
+.content {
+  background-color: $background;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 2rem 1rem;
+
+  h3 {
+    text-align: center;
+    padding: 1rem 0rem;
+    color: $primary;
+  }
+}
+
+section {
+  background-color: $on-background;
+  color: $font-color-default;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+
+  text-align: center;
+  width: 90vw;
+  min-height: 350px;
+  max-width: 800px;
+  margin: 2rem;
+
+  padding: 1rem;
+
+  a {
+    color: $primary-light;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: all 0.05s ease;
+
+    &:hover,
+    &:active {
+      color: $secondary;
+      text-decoration: underline;
+      transition: all 0.05s ease;
+    }
+  }
+
+  button {
+    margin: 1rem 0rem;
+  }
+}
+
+.field-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+
+  .mat-form-field {
+    width: 90%;
+    margin: 2.5rem 0rem;
+
+    input {
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+@import "src/styles.scss";
+
+.fix-container {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.menu-space{
+    margin-top: 6rem;
+}
+
+.menu {
+  height: fit-content;
+  background-color: $primary;
+  color: $on-primary;
+
+  h1 {
+    font-size: 1.5rem;
+    padding: 2rem 0rem;
+    cursor: pointer;
+  }
+}
+
+.remaining-space {
+  flex: 1 1 auto;
+}
+
+#items {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: $primary;
+  color: $on-primary;
+}
+
+.item {
+  justify-content: flex-end;
+  padding: 0.5rem 1rem;
+  a {
+    color: $on-primary !important;
+  }
+}
+
+.item-active {
+  text-decoration: underline;
+}
