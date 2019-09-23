@@ -12,12 +12,8 @@ export abstract class BaseComponent {
 
   constructor(private snackBar?: MatSnackBar, private router?: Router) { }
 
-  public reload(){
-    this.router.navigate(["/user/credit"]);
-  }
-
   public openSnackBar(snackMessage: string, cssClass?: boolean, time?: number) {
-    let snackBarRef = this.snackBar.open(snackMessage, "", {
+    this.snackBar.open(snackMessage, "", {
       duration: time ? time : this.snackBarTime,
       panelClass: isUndefined(cssClass) ? "" : cssClass ? "snack-true" : "snack-false"
     });

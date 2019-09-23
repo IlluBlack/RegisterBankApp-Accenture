@@ -27,23 +27,44 @@ export class GetCreditComponent extends BaseComponent implements OnInit {
   }
 
   validateUser() {
-    this.loading();
+    if (this.isIDNumber()) {
+      if (this.isIDInteger()) {
+        this.loading();
+        this.isInDataBase();
+      } else {
+        this.showInvalidIdentificationInput("Recuerda que tu identificación no debe contener puntos ni comas", 6000);
+      }
+    } else {
+      this.showInvalidIdentificationInput("Recuerda que tu identificación debe ser numérica");
+    }
+  }
 
+  isIDNumber() {
+    return !isNaN(Number(this.identification.value.toString()));
+  }
+  isIDInteger() {
+    return Number.isInteger(Number(this.identification.value.toString()))
+  }
+
+  isInDataBase() {
     this._getCreditService.isThisUserRegistered(this.identification.value).subscribe(response => {
-      if(!response){
+      if (!response) {
         this.continueNextStep();
-      }else{
-        this.openSnackBar("Lo sentimos. Tu identificación ya se encuentra registrada en nuestra base de datos", undefined, 8000);
-        this.cancelLoading();
+      } else {
+        this.showInvalidIdentificationInput("Lo sentimos. Tu identificación ya se encuentra registrada en nuestra base de datos", 8000);
       }
     }, error => {
       this.openSnackBar("Lo sentimos. Ha ocurrido un error al intentar validar tu identificación", false);
       this.cancelLoading();
     });
-
   }
 
-  continueNextStep(){
+  showInvalidIdentificationInput(message: string, time?: number) {
+    this.openSnackBar(message, undefined, time ? time : 4000);
+    this.cancelLoading();
+  }
+
+  private continueNextStep() {
     this.validID = true;
   }
 

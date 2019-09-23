@@ -21,7 +21,7 @@
       <input matInput [matDatepicker]="pickerBirthday" autocomplete="off"
         placeholder="Selecciona tu fecha de nacimiento" formControlName="birthday" readonly
         (click)="pickerBirthday.open()" [max]="maxDate">
-      <mat-datepicker-toggle matSuffix [for]="pickerBirthday" [disabled]="!personalInformation.valid || loadingBar">
+      <mat-datepicker-toggle matSuffix [for]="pickerBirthday" [disabled]="loadingBar">
       </mat-datepicker-toggle>
       <mat-datepicker #pickerBirthday startView="multi-year" disabled="false"></mat-datepicker>
 
@@ -35,7 +35,7 @@
 
   <div style="padding: 1rem 0rem 2rem 0rem;">
     <div class="col-12">
-      <button mat-raised-button type="submit" [disabled]="!personalInformation.valid || loadingBar" class="btn-action"
+      <button mat-raised-button type="submit" [disabled]="!personalInformation.valid || loadingBar" class="btn-action btn-register"
         (click)="register()">REGISTRARME</button>
     </div>
   </div>
@@ -55,7 +55,7 @@
 
   <div style="padding: 1rem 0rem 2rem 0rem;">
     <div class="col-12">
-      <button mat-raised-button class="btn-action">
+      <button mat-raised-button class="btn-action" (click)="reload()">
         <span>Continuar</span>
         <mat-icon>arrow_right</mat-icon>
       </button>

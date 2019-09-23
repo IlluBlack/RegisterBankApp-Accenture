@@ -69,7 +69,10 @@ import { MatMenuModule } from '@angular/material/menu';
     MatChipsModule,
     MatTooltipModule,
     MatSortModule,
-    MatBadgeModule
+    MatBadgeModule,
+
+    FormsModule, 
+    ReactiveFormsModule,
   ],
   exports: [
     MatButtonModule,
@@ -104,7 +107,10 @@ import { MatMenuModule } from '@angular/material/menu';
     MatNativeDateModule,
     MatChipsModule,
     MatTooltipModule,
-    MatBadgeModule
+    MatBadgeModule,
+
+    FormsModule, 
+    ReactiveFormsModule,
   ],
   providers: [],
 })

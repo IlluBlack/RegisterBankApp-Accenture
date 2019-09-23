@@ -3,6 +3,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/base.component';
 import { MatSnackBar } from '@angular/material';
 import { GetCreditService } from 'src/app/services/get-credit/get-credit.service';
+import { User, legalAge } from './../../user.model';
 
 @Component({
   selector: 'app-get-personal-information',
@@ -31,6 +32,10 @@ export class GetPersonalInformationComponent extends BaseComponent implements On
       birthday: ["", [Validators.required]]
     });
 
+    this.calculateMaxDateInput();
+  }
+
+  calculateMaxDateInput(){
     this.maxDate = new Date(this.currentDate.getFullYear() - legalAge, this.currentDate.getMonth(), this.currentDate.getDate() - 1);
   }
 
@@ -42,27 +47,28 @@ export class GetPersonalInformationComponent extends BaseComponent implements On
   register() {
     this.loading();
     if (this.hasLegalAge()) {
-      this.userData = {
-        identification: this.id,
-        firstname: this.personalInformation.get("firstname").value,
-        lastname: this.personalInformation.get("lastname").value,
-        birthday: this.format_DD_MM_YYYY(this.personalInformation.get("birthday").value)
-      };
+      this.setUserData();
 
       this._getCreditService.registerUser(this.userData).subscribe(data => {
-        this.showUserRegistered = true;
-
-        this.openSnackBar("¡Genial! Has sido registrado correctamente en nuestra base de datos", true, 8000);
+        this.userRegisteredCorrectly();
       }, error => {
         this.openSnackBar("Lo sentimos. Ha ocurrido un error al realizar tu registro", false);
         this.cancelLoading();
       });
 
-
     } else {
       this.openSnackBar("Lo sentimos. Debes ser mayor de edad para poder registrarte", undefined);
       this.cancelLoading();
     }
+  }
+
+  setUserData() {
+    this.userData = {
+      identification: this.id,
+      firstname: this.personalInformation.get("firstname").value,
+      lastname: this.personalInformation.get("lastname").value,
+      birthday: this.format_DD_MM_YYYY(this.personalInformation.get("birthday").value)
+    };
   }
 
   hasLegalAge(): boolean {
@@ -87,7 +93,10 @@ export class GetPersonalInformationComponent extends BaseComponent implements On
     }
   }
 
-
+  userRegisteredCorrectly() {
+    this.showUserRegistered = true;
+    this.openSnackBar("¡Genial! Has sido registrado correctamente en nuestra base de datos", true, 8000);
+  }
 
   loading() {
     this.loadingBar = true;
@@ -99,21 +108,17 @@ export class GetPersonalInformationComponent extends BaseComponent implements On
     this.personalInformation.enable();
   }
 
+  reload(){
+    window.location.reload();
+  }
+
 }
 
-export const legalAge = 18;
+
 export const userTranslations = [
   { name: "Identificación", value: "identification" },
   { name: "Nombre", value: "firstname" },
   { name: "Apellido", value: "lastname" },
   { name: "Fecha de nacimiento", value: "birthday" }
-]
-
-export interface User {
-  identification: string,
-  firstname: string,
-  lastname: string,
-  birthday: string
-}
-
+];
 
